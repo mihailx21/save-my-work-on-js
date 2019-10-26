@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input id="id1" type="text">
+    <input id="id2" type="text">
+    <button id="btn">Send</button>
+    <input id="id3" type="text">
+    <button id="btn2">Delete</button>
+    <br>
+    <br>
+    <input id="id4" type="text">
+    <input id="id5" type="text">
+    <button id="btn3">PUT</button>
+
+    <script>
+        btn.onclick = ()=>{
+            let name = id1.value
+            let lasName = id2.value
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: `${name}`, lastName: `${lasName}`})
+        }).then(response =>{
+            return response.json()
+        })
+        .then(data=>{
+            console.log(data)
+        })
+        }
+        btn2.onclick =()=>{
+            let deleted = id3.value
+        fetch(`http://localhost:3000/users/${deleted}`, {
+            method: 'DELETE',
+        
+        }).then(response =>{
+            return response.json()
+        })
+        .then(data=>{
+            console.log(data)
+        })   
+        }
+        btn3.onclick = ()=>{
+            let name = id4.value
+            let lasName = id5.value
+        fetch('http://localhost:3000/users', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: `${name}`, lastName: `${lasName}`})
+        }).then(response =>{
+            return response.json()
+        })
+        .then(data=>{
+            console.log(data)
+        })
+        }
+    </script>
+</body>
+</html>
